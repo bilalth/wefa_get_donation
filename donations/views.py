@@ -2,13 +2,13 @@ from rest_framework import generics, viewsets
 from .models import Donation
 from .serializers import DonationSerializer
 from rest_framework.permissions import IsAuthenticated
-from .permissions import IsOwner
+from .permissions import IsSuperUserorReadOnly
 
 class DonationModelViewSet(viewsets.ModelViewSet):
     queryset = Donation.objects.all()
     serializer_class = DonationSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
-    http_method_names = ["get"]
+    permission_classes = [IsSuperUserorReadOnly]
+    # http_method_names = ["get"]
 
     def get_queryset(self):
         if self.request.user.is_superuser:
@@ -27,7 +27,7 @@ class DonationModelViewSet(viewsets.ModelViewSet):
 
 
 
-class DonationRetrieve(generics.RetrieveAPIView):
-    queryset = Donation.objects.all()
-    serializer_class = DonationSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
+# class DonationRetrieve(generics.RetrieveAPIView):
+#     queryset = Donation.objects.all()
+#     serializer_class = DonationSerializer
+#     permission_classes = [IsAuthenticated, IsOwner]
