@@ -1,7 +1,7 @@
 from django.urls import path
-from .views import DonationListCreate, DonationRetrieve
+from .views import DonationModelViewSet, DonationRetrieve
 
 urlpatterns = [
-    path("", DonationListCreate.as_view()),
+    path("", DonationModelViewSet.as_view()),
     path("<int:pk>", DonationRetrieve.as_view()),
 ]
